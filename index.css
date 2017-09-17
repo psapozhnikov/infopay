@@ -1,0 +1,21 @@
+body {
+    font-family: Arial;
+    font-size: 12px;
+}
+.bold {
+    font-weight: bold;
+}
+.card {
+    margin:20px;
+    padding:10px;
+    width: auto;
+    border: 1px black outset;
+}
+
+.record {
+    line-height: 20px;
+}
+
+.hidden {
+    display: none;
+}

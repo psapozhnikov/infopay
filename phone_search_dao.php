@@ -72,16 +72,19 @@ class phone_search_dao {
         }
 
         $result = [];
+        $row_number = 0;
         /**
          * @var SimpleXMLElement $record
          * @var SimpleXMLElement $child
          */
         foreach ($xml->{'record'} as $record) {
             $temp_record = [];
+            $row_number++;
             foreach ($record->children() as $child) {
                 $name = $child->getName();
                 $temp_record[phone_search_model::$xml_to_model_map[$name] ?? $name] = (string)$record->{$name};
             }
+            $temp_record['record_id'] = $row_number;
             $result[] = $temp_record;
         }
 

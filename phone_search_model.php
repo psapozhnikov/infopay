@@ -6,7 +6,14 @@
  * Time: 2:44 PM
  */
 
-class phone_search_model {
+require_once 'base_model.php';
+
+class phone_search_model extends base_model {
+
+    /**
+     * @var int
+     */
+    public $record_id;
 
     /**
      * @var string
@@ -48,6 +55,11 @@ class phone_search_model {
      */
     public $age;
 
+    /**
+     * @var int
+     */
+    public $info;
+
     const FIRST_NAME = 'first_name';
 
     const LAST_NAME = 'last_name';
@@ -64,6 +76,10 @@ class phone_search_model {
 
     const AGE = 'age';
 
+    const RECORD_ID = 'record_id';
+
+    const INFO = 'info';
+
     public static $xml_to_model_map = [
         'firstname'  => self::FIRST_NAME,
         'lastname'   => self::LAST_NAME,
@@ -73,28 +89,20 @@ class phone_search_model {
         'addressB'   => self::ADDRESS_B
     ];
 
-    public function populate($data) {
-        $keys = array_keys($data);
-        foreach ($keys as $key) {
-            if (property_exists($this, $key)) {
-                $this->{"{$key}"} = $data[$key];
-            }
-        }
-        return $this;
-    }
-
     /**
      * @return array
      */
-    public function to_array() {
+    public function to_array() : array {
         return [
+          self::RECORD_ID   => $this->record_id,
           self::FIRST_NAME  => $this->first_name,
           self::MIDDLE_NAME => $this->middle_name,
           self::LAST_NAME   => $this->last_name,
           self::ADDRESS_A   => $this->address_a,
           self::ADDRESS_B   => $this->address_b,
           self::STATE       => $this->state,
-          self::AGE         => $this->age
+          self::AGE         => $this->age,
+          self::INFO        => $this->info
         ];
     }
 }

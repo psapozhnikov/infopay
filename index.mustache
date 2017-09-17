@@ -6,3 +6,49 @@
 </table>
 <br/>
 <button type="button" id="btnSearch">Search</button>
+{{^is_load}}
+    <div class="card">
+    <h2>Search Criteria</h2>
+    <table>
+    {{#search_criteria}}
+        <tr>
+            <td align="right" class="bold">{{text}}:</td>
+            <td>{{value}}</td>
+        </tr>
+    {{/search_criteria}}
+    </table>
+    </div>
+    <div class="card">
+        <h2>Results</h2>
+        <table width="400px">
+            <tr>
+                <th></th>
+                <th align="left">Full Name</th>
+                <th align="left">State</th>
+            </tr>
+            {{#records}}
+                <tr class="record">
+                {{#first_name}}
+                    <td valign="top" align="left">
+                          <a class="expand expand-{{record_id}}" href="#" data-record-id="{{record_id}}">+</a>
+                    </td>
+                    <td align="left">
+                        <a href="#">{{first_name}} {{last_name}}</a>
+                        <table class="hidden record-details-{{record_id}}">
+                            <tr>
+                                <td>Address</td>
+                                <td>{{address_a}} {{address_b}}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="left">{{state}}</td>
+                {{/first_name}}
+                {{^first_name}}
+                    <td></td>
+                    <td colspan="2">{{info}}</td>
+                {{/first_name}}
+                </tr>
+            {{/records}}
+        </table>
+    </div>
+{{/is_load}}

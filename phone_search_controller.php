@@ -15,17 +15,27 @@ try {
         throw new \Exception('The phone number is required');
     }
 
-    $area_code = substr($_POST['phone_number'], 0, 3);
-    $phone_number = substr($_POST['phone_number'], 3, strlen($_POST['phone_number']) - 3);
+    $area_code = substr($_POST['phone_number'], strlen($_POST['phone_number']) == 10 ? 0 : 1, 3);
+    $phone_number = substr($_POST['phone_number'], strlen($_POST['phone_number']) == 10 ? 3 : 4, strlen($_POST['phone_number']) - 3);
 
     $params = [
-      'areacode' => 386,
-      'phone'    => 7540455
+      'areacode' => $area_code,
+      'phone'    => $phone_number
+    ];
+
+    $search_criteria = [
+      0 => ['text' => 'area code', 'value' => $params['areacode']],
+      1 => ['text' => 'phone number', 'value' => $params['phone']]
     ];
 
     $collection = new phone_search_collection();
     $collection->load($params);
-    $response = json_encode($collection->to_array());
+    $response_array = [
+        'is_load'         => false,
+        'search_criteria' => $search_criteria,
+        'records'         => $collection->to_array()
+    ];
+    $response = json_encode($response_array);
 
     http_response_code(200);
 } catch (\Exception $ex) {
