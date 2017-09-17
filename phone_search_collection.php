@@ -7,52 +7,25 @@
  */
 
 require_once 'phone_search_model.php';
+require_once 'base_collection.php';
+require_once 'base_model.php';
 
-class phone_search_collection {
-
-    /**
-     * @var array
-     */
-    public $models;
+class phone_search_collection extends base_collection {
 
     /**
      * Creates an instance of model
      *
      * @param $data
-     * @return phone_search_model
+     * @return base_model
      */
-    private function create_model($data) : phone_search_model {
+    public function create_model($data) : base_model {
         $model = new phone_search_model();
         $model->populate($data);
         return $model;
     }
 
-    /**
-     * Populate this collection
-     *
-     * @param $data
-     * @return $this|bool
-     */
-    public function populate($data) {
-        if (empty($data)) {
-            return false;
-        }
-        foreach ($data as $model_data) {
-            $this->models[] = $this->create_model($model_data);
-        }
-        return $this;
-    }
-
-    public function to_array() : array {
-        $collection_array = [];
-        foreach ($this->models as $model) {
-            $collection_array[] = $model->to_array();
-        }
-        return $collection_array;
-    }
-
-    public function load($params) {
+    public function load($params) : phone_search_collection {
         $dao = new phone_search_dao();
-        return $this->populate($dao->retrieve_records($params));
+        return $this->populate($dao->retrieve_phone_search_records($params));
     }
 }

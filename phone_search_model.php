@@ -94,15 +94,16 @@ class phone_search_model extends base_model {
      */
     public function to_array() : array {
         return [
-          self::RECORD_ID   => $this->record_id,
-          self::FIRST_NAME  => $this->first_name,
-          self::MIDDLE_NAME => $this->middle_name,
-          self::LAST_NAME   => $this->last_name,
-          self::ADDRESS_A   => $this->address_a,
-          self::ADDRESS_B   => $this->address_b,
-          self::STATE       => $this->state,
-          self::AGE         => $this->age,
-          self::INFO        => $this->info
+          self::RECORD_ID    => $this->record_id,
+          self::FIRST_NAME   => $this->first_name,
+          self::MIDDLE_NAME  => $this->middle_name,
+          self::LAST_NAME    => $this->last_name,
+          self::ADDRESS_A    => $this->address_a,
+          self::ADDRESS_B    => $this->address_b,
+          self::STATE        => $this->state,
+          self::AGE          => $this->age,
+          self::INFO         => $this->info,
+          self::PHONE_NUMBER => $this->phone_number
         ];
     }
 }

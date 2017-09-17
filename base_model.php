@@ -9,7 +9,7 @@
 abstract class base_model {
     abstract function to_array() : array;
 
-    public function populate($data) {
+    public function populate($data) : base_model {
         $keys = array_keys($data);
         foreach ($keys as $key) {
             if (property_exists($this, $key)) {

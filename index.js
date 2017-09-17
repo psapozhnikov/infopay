@@ -1,5 +1,5 @@
 $(document).on('click','#btnSearch',function () {
-    let phoneNumber = $('#phone_number').val();
+    const phoneNumber = $('#phone_number').val();
     if (phoneNumber === ''){
         alert('Phone Number is required.');
         return false;
@@ -15,11 +15,12 @@ $(document).on('click','#btnSearch',function () {
             $('#target').html(rendered);
         });
     }).fail(function () {
+        alert('An error has occurred');
     });
 });
 
 $(document).on('click', '.expand', function (e) {
-    let recordId = e.target.dataset.recordId;
+    const recordId = e.target.dataset.recordId;
     let recordDetails = $('.record-details-' + recordId);
     let expandNode = $('.expand-' + recordId);
     if (recordDetails.hasClass('hidden')) {
@@ -30,6 +31,26 @@ $(document).on('click', '.expand', function (e) {
         expandNode.text('+');
     }
 
+});
+
+$(document).on('click', '.person_detail', function (e) {
+    const firstName = e.target.dataset.firstName;
+    const lastName = e.target.dataset.lastName;
+    const phoneNumber = e.target.dataset.phoneNumber;
+
+    $.ajax({
+        url: 'phone_search_controller.php',
+        dataType: 'json',
+        data: {phone_number: phoneNumber, first_name: firstName, last_name:lastName},
+        method: 'POST'
+    }).done(function (data) {
+        $.get('index.mustache', function (template) {
+            let rendered = Mustache.render(template, data);
+            $('#target').html(rendered);
+        });
+    }).fail(function () {
+        alert('An error has occurred');
+    });
 });
 
 function loadApp() {

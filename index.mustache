@@ -33,7 +33,14 @@
                           <a class="expand expand-{{record_id}}" href="#" data-record-id="{{record_id}}">+</a>
                     </td>
                     <td align="left">
-                        <a href="#">{{first_name}} {{last_name}}</a>
+                        <a href="#"
+                           class="person_detail"
+                           data-first-name="{{first_name}}"
+                           data-last-name="{{last_name}}"
+                           data-phone-number="{{phone_number}}"
+                        >
+                            {{first_name}} {{last_name}}
+                        </a>
                         <table class="hidden record-details-{{record_id}}">
                             <tr>
                                 <td>Address</td>
@@ -51,4 +58,9 @@
             {{/records}}
         </table>
     </div>
+    {{#people_records_loaded}}
+        <div class="card">
+            <h2>People results</h2>
+        </div>
+    {{/people_records_loaded}}
 {{/is_load}}
