@@ -11,6 +11,15 @@ abstract class base_dao {
      * @var string
      */
     private $url;
+    /**
+     * @var string
+     */
+    private $phone_url;
+
+    /**
+     * @var string
+     */
+    private $people_url;
 
     /**
      * @var string
@@ -28,10 +37,16 @@ abstract class base_dao {
     public function __construct() {
         $this->user_name = 'accucomtest';
         $this->password = 'test104';
-        $this->url = 'https://www.infopay.com/phptest_phone_xml.php';
+        $this->phone_url = 'https://www.infopay.com/phptest_phone_xml.php';
+        $this->people_url = 'https://www.infopay.com/phptest.php';
     }
 
     private function construct_url($params) {
+        if (in_array('firstname', array_keys($params))) {
+            $this->url = $this->people_url;
+        } else {
+            $this->url = $this->phone_url;
+        }
         $this->url .= "?username={$this->user_name}";
         $this->url .= "&password={$this->password}";
 
@@ -44,7 +59,7 @@ abstract class base_dao {
     /**
      * @param $params
      * @return SimpleXMLElement
-     * @throws Exception
+     * @throws \Exception
      */
     public function retrieve_xml($params) : SimpleXMLElement {
         $this->construct_url($params);
@@ -58,8 +73,6 @@ abstract class base_dao {
 
         $result = curl_exec($ch);
 
-        curl_close($ch);
-
         if ($result === false) {
             throw new \Exception(curl_error($ch));
         }
@@ -68,6 +81,13 @@ abstract class base_dao {
             //This should never happen but just in case
             throw new \Exception('Empty results.');
         }
+
+        if (!empty(curl_error($ch))) {
+            throw new \Exception(curl_error($ch));
+        }
+
+        curl_close($ch);
+
         return new SimpleXMLElement($result);
     }
 }

@@ -19,7 +19,8 @@ class phone_search_dao extends base_dao {
      */
     public function retrieve_phone_search_records($params) : array {
         $xml = $this->retrieve_xml($params);
-        $number_of_rows = $xml->{'stats'}->{'rows'};
+
+        $number_of_rows = (string)$xml->{'stats'}->{'rows'};
 
         if ($number_of_rows == 0) {
             return [];
@@ -54,7 +55,7 @@ class phone_search_dao extends base_dao {
     public function retrieve_people_details_records($params) : array {
         $xml = $this->retrieve_xml($params);
 
-        $number_of_rows = $xml->{'searchres'}->{'total_rows'};
+        $number_of_rows = (string)$xml->{'total_rows'};
 
         if ($number_of_rows == 0) {
             return [];

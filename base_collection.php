@@ -13,9 +13,12 @@ abstract class base_collection {
     /**
      * @var array
      */
-    protected $models;
+    public $models;
 
     public function to_array() : array {
+        if (empty($this->models)) {
+            return [];
+        }
         $collection_array = [];
         foreach ($this->models as $model) {
             $collection_array[] = $model->to_array();
@@ -29,9 +32,9 @@ abstract class base_collection {
      * @param $data
      * @return $this|bool
      */
-    public function populate($data) : base_collection {
+    public function populate($data) {
         if (empty($data)) {
-            return false;
+            return $this;
         }
         foreach ($data as $model_data) {
             $this->models[] = $this->create_model($model_data);

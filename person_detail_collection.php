@@ -9,6 +9,7 @@
 require_once 'base_collection.php';
 require_once 'person_detail_model.php';
 require_once 'base_model.php';
+require_once 'phone_search_dao.php';
 
 class person_detail_collection extends base_collection {
 

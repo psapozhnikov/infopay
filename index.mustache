@@ -61,6 +61,19 @@
     {{#people_records_loaded}}
         <div class="card">
             <h2>People results</h2>
+
+            <table width="500px">
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                </tr>
+                {{#people_records}}
+                    <tr>
+                        <td>{{first_name}} {{last_name}}</td>
+                        <td>{{address}} {{city}} {{state}} {{zip}}</td>
+                    </tr>
+                {{/people_records}}
+            </table>
         </div>
     {{/people_records_loaded}}
 {{/is_load}}

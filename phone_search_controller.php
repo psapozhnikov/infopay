@@ -15,12 +15,18 @@ try {
         throw new \Exception('Phone number is required.');
     }
 
-    if (empty($_POST['first_name']) && empty($_POST['last_name']) || (!empty($_POST['first_name']) && !empty($_POST['last_name']))) {
+    if ((!empty($_POST['first_name']) || !empty($_POST['last_name'])) && (empty($_POST['first_name']) || empty($_POST['last_name']))) {
         throw new \Exception('First name and last name must both be present when searching on a name.');
     }
 
-    $area_code = substr($_POST['phone_number'], strlen($_POST['phone_number']) == 10 ? 0 : 1, 3);
-    $phone_number = substr($_POST['phone_number'], strlen($_POST['phone_number']) == 10 ? 3 : 4, strlen($_POST['phone_number']) - 3);
+    $phone_number = $_POST['phone_number'];
+    $phone_number = str_replace('-', '', $phone_number);
+    $phone_number = str_replace('(', '', $phone_number);
+    $phone_number = str_replace(')', '', $phone_number);
+    $phone_number = str_replace(' ', '', $phone_number);
+
+    $area_code = substr($phone_number, strlen($phone_number) == 10 ? 0 : 1, 3);
+    $phone_number = substr($phone_number, strlen($phone_number) == 10 ? 3 : 4, strlen($phone_number) - 3);
     $params = [
         'areacode' => $area_code,
         'phone'    => $phone_number

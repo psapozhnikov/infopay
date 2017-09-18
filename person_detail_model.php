@@ -8,6 +8,7 @@
 require_once 'base_model.php';
 require_once 'address_collection.php';
 require_once 'relative_collection.php';
+require_once 'phone_search_model.php';
 
 class person_detail_model extends phone_search_model {
 
@@ -56,7 +57,7 @@ class person_detail_model extends phone_search_model {
         'dob'        => self::DATE_OF_BIRTH,
     ];
 
-    public function populate($data) : person_detail_model {
+    public function populate($data) : base_model {
         parent::populate($data);
 
         $address_collection = new address_collection();
