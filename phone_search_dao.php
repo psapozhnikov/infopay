@@ -8,6 +8,7 @@
 
 require_once 'phone_search_model.php';
 require_once 'base_dao.php';
+require_once 'person_detail_model.php';
 
 class phone_search_dao extends base_dao {
 
@@ -78,7 +79,7 @@ class phone_search_dao extends base_dao {
             foreach ($record->children() as $child) {
                 if ($child->children()->count() == 0) {
                     $name = $child->getName();
-                    $temp_record[phone_search_model::$xml_to_model_map[$name] ?? $name] = (string)$record->{$name};
+                    $temp_record[person_detail_model::$xml_to_model_map[$name] ?? $name] = (string)$record->{$name};
                 }
             }
             $relatives = $record->{'relatives'};

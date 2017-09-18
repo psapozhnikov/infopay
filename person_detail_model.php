@@ -47,6 +47,8 @@ class person_detail_model extends phone_search_model {
      */
     public $date_of_birth;
 
+    public $has_details;
+
     const DATE_OF_BIRTH = 'date_of_birth';
 
     public static $xml_to_model_map = [

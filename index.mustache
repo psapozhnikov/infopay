@@ -62,15 +62,45 @@
         <div class="card">
             <h2>People results</h2>
 
-            <table width="500px">
+            <table width="700px" class="people_table">
                 <tr>
-                    <th>Name</th>
-                    <th>Address</th>
+                    <th></th>
+                    <th align="right">Name</th>
+                    <th align="left" class="address_cell">Address</th>
                 </tr>
                 {{#people_records}}
                     <tr>
-                        <td>{{first_name}} {{last_name}}</td>
-                        <td>{{address}} {{city}} {{state}} {{zip}}</td>
+                        <td valign="top"><a href="#" class="expand-person-record expand-person-record-id-{{record_id}}" data-record-id="{{record_id}}">+</a></td>
+                        <td align="right">
+                            <span>{{first_name}} {{last_name}}</span>
+                            <table cellpadding="0" cellspacing="0" class="person_record_detail person_record_detail-id-{{record_id}} hidden">
+                                <tr>
+                                    <td align="right" class="bold">Age:</td>
+                                    <td class="person_record_detail_value">{{age}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="bold">Date of Birth:</td>
+                                    <td class="person_record_detail_value">{{date_of_birth}}</td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="bold">Relatives:</td>
+                                    <td class="person_record_detail_value">
+                                        {{#relatives}}
+                                            {{first_name}} {{last_name}} {{age}}<br/>
+                                        {{/relatives}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" class="bold">Previous Addresses:</td>
+                                    <td class="person_record_detail_value">
+                                        {{#previous_addresses}}
+                                          {{city}} {{state}} {{zip}}<br/>
+                                        {{/previous_addresses}}
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td align="left" valign="top" class="address_cell">{{address}} {{city}} {{state}} {{zip}}</td>
                     </tr>
                 {{/people_records}}
             </table>

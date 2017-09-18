@@ -33,6 +33,19 @@ $(document).on('click', '.expand', function (e) {
 
 });
 
+$(document).on('click', '.expand-person-record', function (e) {
+    const personRecordId = e.target.dataset.recordId;
+    let personRecordDetails = $('.person_record_detail-id-' + personRecordId);
+    let expandPersonNode = $('.expand-person-record-id-' + personRecordId);
+    if (personRecordDetails.hasClass('hidden')) {
+        personRecordDetails.removeClass('hidden');
+        expandPersonNode.text('-');
+    } else {
+        personRecordDetails.addClass('hidden');
+        expandPersonNode.text('+');
+    }
+});
+
 $(document).on('click', '.person_detail', function (e) {
     const firstName = e.target.dataset.firstName;
     const lastName = e.target.dataset.lastName;
